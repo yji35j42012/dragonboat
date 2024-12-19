@@ -5,13 +5,64 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<title>HOTAL</title>
+	<title>Dragon Boat</title>
 	<link rel="stylesheet" href="./style/css/all.css" />
 </head>
 
 <body>
-
 	<div id="app" class="wrap">
+		<header class="header">
+			<div class="container">
+				<div class="logo"><img src="./images/Monster_Logo.png" alt=""></div>
+				<button :class="['nav_btn',showNavBtn?'on':'']" @click="navBtn">
+					<span class="nav_btn_span"></span>
+				</button>
+				<div class="nav">
+					<router-link class="nav_item" to="/">首頁</router-link>
+					<router-link class="nav_item" to="/about">關於我們</router-link>
+					<router-link class="nav_item" to="/news">最新消息</router-link>
+					<router-link class="nav_item" to="/history">歷年得獎紀錄</router-link>
+					<router-link class="nav_item" to="/appiontment">預約體驗</router-link>
+					<router-link class="nav_item" to="/cooperate">合作洽談</router-link>
+					<router-link class="nav_item" to="/moment">精彩時刻</router-link>
+				</div>
+			</div>
+		</header>
+		<router-view></router-view>
+		<footer class="footer">
+			<div class="container">
+				<div class="footer_info">
+					<div class="logo_footer">
+						<img src="./images/Monster_Logo_footer.png" alt="">
+					</div>
+					<div class="footer_info_txt">
+						<button class="btn_ig">
+							<span>instagram</span>
+						</button>
+						<p>
+							我們的隊伍成立於2022年，致力於推廣龍舟文化和團隊精神。
+							我們的隊伍由一群充滿熱情的社會人士組成，無論你是龍舟運動
+							的初學者還是有經驗的選手，我們都誠摯地歡迎志同道合的你加
+							入我們的行列。
+						</p>
+					</div>
+				</div>
+				<div class="footer_nav">
+					<div class="left">
+						<router-link class="footer_nav_item" to="/">首頁</router-link>
+						<router-link class="footer_nav_item" to="/about">關於我們</router-link>
+						<router-link class="footer_nav_item" to="/news">最新消息</router-link>
+						<router-link class="footer_nav_item" to="/history">歷年得獎紀錄</router-link>
+					</div>
+					<div class="right">
+						<router-link class="footer_nav_item" to="/appiontment">預約體驗</router-link>
+						<router-link class="footer_nav_item" to="/cooperate">合作洽談</router-link>
+						<router-link class="footer_nav_item" to="/moment">精彩時刻</router-link>
+					</div>
+				</div>
+			</div>
+			<div class="copyright">Copyright © Lucky Wave All Rights Reserved</div>
+		</footer>
 		<!-- <header v-if="showHeader" :class="['header',isTagFilter?'tagFitler':'']" v-if="!isTagFilter">
 			<img src="./images/header.jpg" alt="" class="header_bg">
 			<ul class="navTab" v-if="!isTagFilter">
@@ -79,14 +130,13 @@
 		}
 		const { loadModule }=window['vue3-sfc-loader'];
 		const routes=[
-			// {
-			// 	path: '/',
-			// 	component: () => loadModule('./page/schedule.vue', options),
-			// },
-			// {
-			// 	path: '/schedule',
-			// 	component: () => loadModule('./page/schedule.vue', options),
-			// },
+			{ path: '/', component: () => loadModule('./page/home.vue', options), },
+			{ path: '/about', component: () => loadModule('./page/about.vue', options), },
+			{ path: '/news', component: () => loadModule('./page/news.vue', options), },
+			{ path: '/history', component: () => loadModule('./page/history.vue', options), },
+			{ path: '/appiontment', component: () => loadModule('./page/appiontment.vue', options), },
+			{ path: '/cooperate', component: () => loadModule('./page/cooperate.vue', options), },
+			{ path: '/moment', component: () => loadModule('./page/moment.vue', options), },
 		];
 		const router=VueRouter.createRouter({
 			history: VueRouter.createWebHistory('#'),
@@ -97,6 +147,7 @@
 			data() {
 				return {
 					nowPage: "",
+					showNavBtn: false
 					// icon_all: icon_all,
 				};
 			},
@@ -121,7 +172,11 @@
 				// 	}
 				// },
 			},
-			methods: {},
+			methods: {
+				navBtn() {
+					this.showNavBtn=!this.showNavBtn
+				}
+			},
 		});
 		app.use(router);
 		app.use(store);
